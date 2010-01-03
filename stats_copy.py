@@ -3,6 +3,7 @@ import time
 from datetime import datetime
 import threading
 import sys
+import json
 
 class Couch:
 	"""Basic wrapper class for operations on a couchDB"""
@@ -36,9 +37,12 @@ target_srv = Couch(sys.argv[2])
 target_db = sys.argv[3]
 
 def stats(delay):
-	stats = source_srv.stats(delay).read()
-	path = '/%s/stats-%s' % (target_db, datetime.now().strftime("%Y-%m-%d-%M%S"))
-	print target_srv.put(path, stats).read()
+	stats = json.loads(source_srv.stats(delay).read())
+	now = datetime.now()
+	jsonDate = now.strftime("%Y-%m-%d %H:%M:%S +0000")
+	stats['timestamp'] = jsonDate
+	path = '/%s/stats-%s' % (target_db, now.strftime("%Y-%m-%d-%H%M%S"))
+	print target_srv.put(path, json.dumps(stats)).read()
 
 delay = 60
 while True:
