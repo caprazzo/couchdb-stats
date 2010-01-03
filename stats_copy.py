@@ -39,7 +39,7 @@ target_db = sys.argv[3]
 def stats(delay):
 	stats = json.loads(source_srv.stats(delay).read())
 	now = datetime.now()
-	jsonDate = now.strftime("%Y-%m-%d %H:%M:%S +0000")
+	jsonDate = now.strftime("%Y/%m/%d %H:%M:%S +0000")
 	stats['timestamp'] = jsonDate
 	path = '/%s/stats-%s' % (target_db, now.strftime("%Y-%m-%d-%H%M%S"))
 	print target_srv.put(path, json.dumps(stats)).read()
