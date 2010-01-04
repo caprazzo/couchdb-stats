@@ -51,3 +51,11 @@ function get_dtformat(group_level) {
 		}
 	}
 }
+
+function app_root(current_path) {
+	for(var idx=0; idx<current_path.length; idx++) {
+		if (current_path[idx] == '_design') {
+			return '/' + current_path.slice(0,idx+2).join('/') + '/';
+		}
+	}
+}

@@ -8,6 +8,9 @@ python stats_copy.py <server_to_track> <target_server> <target_database> <stats 
 To store localhost couchdb stats each minute on localhost/stats use
 $ python stats_copy.py localhost localhost stats 60 &disown
 
+I suggest to use range 900 (15 minutes) in production, more than that is almost certainly overkill. 
+But you get to choose your poison.
+
 To stop, kill the process.
 
 Install couchapp app/ in the same database where the stats are being collected.

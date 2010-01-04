@@ -18,7 +18,8 @@ function(head, req) {
 	
 	if (!table_only)
 		send(Mustache.to_html(templates.chronoscope.html_head));
-		
+	
+	send(Mustache.to_html(templates.app_head, {root:app_root(req.path)}));
 	send(Mustache.to_html(templates.chronoscope.table_head, {dtformat:dt.dtformat}));
 	while(row = getRow()) {		
 		send(Mustache.to_html(templates.chronoscope.table_item, {
@@ -28,7 +29,7 @@ function(head, req) {
 		send('\n');
 	}
 	send(Mustache.to_html(templates.chronoscope.table_foot));
-	
+	send(Mustache.to_html(templates.app_foot));
 	if (!table_only)
 		send(Mustache.to_html(templates.chronoscope.html_foot));
 }
