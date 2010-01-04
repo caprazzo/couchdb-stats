@@ -15,7 +15,7 @@ Install couchapp app/ in the same database where the stats are being collected.
 Views
 =====
 
-_list/table/all_http_requests
+_list/table/all_requests_hits
 -----------------------------
 
 Displays a chronoscope view of all http requests 
@@ -35,9 +35,9 @@ Standard couchdb range queries can be used to limit the results
 
 Examples
 Chronoscope view by the hour:
-http://caprazzi.net:5984/stats/_design/app/_list/table/all_http_requests?group_level=4
+http://caprazzi.net:5984/stats/_design/app/_list/table/all_requests_hits?group_level=4
 
 Table view by the day:
-http://caprazzi.net:5984/stats/_design/app/_list/table/all_http_requests?group_level=3&table_only=true
+http://caprazzi.net:5984/stats/_design/app/_list/table/all_requests_hits?group_level=3&table_only=true
 
 	

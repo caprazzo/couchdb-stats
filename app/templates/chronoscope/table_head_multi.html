@@ -1,0 +1,13 @@
+{{%JSTACHE-ENABLE-STRING-ARRAYS}}
+
+		<table class="cmf-chart">
+		  <colgroup>
+		    <col class="cmf-dateformat" title="{{dtformat}}">
+		    <col class="cmf-numberformat" title="#">
+		  </colgroup>
+		  <thead>
+		    <tr>
+		        <th>Time</th>{{#methods}}<th>{{.}}</th>{{/methods}}
+		    </tr>
+		  </thead>
+		  <tbody>
