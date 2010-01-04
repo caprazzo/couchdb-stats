@@ -1,1 +1,3 @@
 stats visualization for couchdb
+===============================
+

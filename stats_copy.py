@@ -28,6 +28,9 @@ class Couch:
 source_srv = Couch(sys.argv[1])
 target_srv = Couch(sys.argv[2])
 target_db = sys.argv[3]
+# beware couchdb only supports fixed delays of 60, 300 and 900
+# anything else will not work
+delay = int(sys.argv[4])
 
 def stats(delay):
 	stats = json.loads(source_srv.stats(delay).read())
@@ -38,7 +41,6 @@ def stats(delay):
 	path = '/%s/stats-%s' % (target_db, now.strftime("%Y-%m-%d-%H%M%S"))
 	print target_srv.put(path, json.dumps(stats)).read()
 
-delay = 60
 while True:
 	threading.Thread(target=stats, args=[delay]).start()
 	time.sleep(delay)
