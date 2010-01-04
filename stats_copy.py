@@ -25,13 +25,6 @@ class Couch:
 		c.request("GET","/_stats?range=%s" % range, "",{})
 		return c.getresponse()
 
-def repeat(event, every, action):
-	while True:
-		event.wait(every)
-		if event.isSet():
-			break
-		action()
-
 source_srv = Couch(sys.argv[1])
 target_srv = Couch(sys.argv[2])
 target_db = sys.argv[3]
