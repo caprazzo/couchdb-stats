@@ -14,6 +14,7 @@ But you get to choose your poison.
 To stop, kill the process.
 
 Install couchapp app/ in the same database where the stats are being collected.
+Greate a ogus document with id bogus (Yes yes. It's lame but works, so relax :)
 
 Views
 =====
