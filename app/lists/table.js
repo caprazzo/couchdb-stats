@@ -17,9 +17,9 @@ function(head, req) {
 	
 	var dt = get_dtformat(parseInt(req.query.group_level));
 	var table_only = (req.query.table_only && req.query.table_only=='true');
-	
+	var title = req.path[req.path.length-1] + ' group by ' + req.query.group_level;
 	if (!table_only) {
-		send(Mustache.to_html(templates.app_head, {root:app_root(req.path)}));
+		send(Mustache.to_html(templates.app_head, {root:app_root(req.path), title:title}));
 	}
 
 	send(Mustache.to_html(templates.chronoscope.table_head, {dtformat:dt.dtformat}));
