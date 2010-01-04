@@ -9,6 +9,7 @@
 function(head, req) {
 	// !json templates
 	// !code lib/mustache.js
+	// !code lib/stats.js
 	
  	start({"headers":{"Content-Type" : "text/html"}});
 	
@@ -16,36 +17,28 @@ function(head, req) {
 	// key is rebuilt skipping element 4 as it's a 5-minutes span and
 	// is not understood by chronoscope dtformat (better done in the template?)
 	
+	var dt = get_dtformat(parseInt(req.query.group_level));
 	var table_only = (req.query.table_only && req.query.table_only=='true');
-	var f_key = function(key) {
-		return [ key[0], key[1], key[2], key[3], key[5] ].join('-')
-	}
-	var dtformat = 'yyyy-M-d-H-m'
-	if (req.query.group_level == 5) {
-		f_key = function(key) {
-			return [ key[0], key[1], key[2], key[3], key[4]*5 ].join('-')
-		}
-	}
-	else if (parseInt(req.query.group_level) < 5) {
-		f_key = function(key) {
-			return key.join('-');
-		}
-		dtformat = 'yyyy-M-d-H-m'.split('-').slice(0,parseInt(req.query.group_level)).join('-');
-	}
 	
 	if (!table_only)
 		send(Mustache.to_html(templates.chronoscope.html_head));
-		
-	
-	var methods = ["HEAD","GET","MOVE","PUT","POST","COPY","DELETE"];
-	send(Mustache.to_html(templates.chronoscope.table_head_multi, {methods: methods, dtformat:dtformat}));
+			
+	var keys = null;	
 	while(row = getRow()) {		
+		if (keys == null) {
+			keys = [];
+			for (var key in row.value) {
+				keys.push(key);
+			}
+			keys.sort();
+			send(Mustache.to_html(templates.chronoscope.table_head_multi, {keys: keys, dtformat: dt.dtformat}));
+		}
 		var values = [];
-		methods.forEach(function(method) {
-			values.push(row.value[method]);
+		keys.forEach(function(k) {
+			values.push(row.value[k]);
 		});
 		send(Mustache.to_html(templates.chronoscope.table_item_multi, {
-			key: f_key(row.key),
+			key: dt.f_key(row.key),
 			value: values
 		}));
 		send('\n');

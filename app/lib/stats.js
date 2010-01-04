@@ -24,3 +24,30 @@ function extended_time_key_from_json_date(str_timestamp) {
 		date.getUTCMinutes()
 	];
 }
+
+function get_dtformat(group_level) {
+	if (group_level == 6) {
+		return {
+			f_key: function(key) {
+				return [ key[0], key[1], key[2], key[3], key[5] ].join('-')
+			},
+			dtformat: 'yyyy-M-d-H-m'			
+		}
+	}
+	else if (group_level == 5) {
+		return {
+			f_key: function(key) {
+				return [ key[0], key[1], key[2], key[3], key[4]*5 ].join('-')
+			},
+			dtformat: 'yyyy-M-d-H-m'			
+		}
+	}
+	else if (group_level < 5) {
+		return {
+			f_key: function(key) {
+				return key.join('-');
+			},
+			dtformat: 'yyyy-M-d-H-m'.split('-').slice(0,parseInt(req.query.group_level)).join('-')
+		}
+	}
+}
