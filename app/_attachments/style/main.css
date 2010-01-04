@@ -1,1 +1,28 @@
-/* add styles here */
+/* @override http://localhost:5984/stats/_design/app/style/main.css */
+
+.app-main {
+	margin-left: auto;
+	margin-right: auto;
+	width: 600px;
+	align:center;
+}
+.app-tools {
+	background-color: #00B7EB;
+	text-align: left;
+	padding: 1em;
+	margin-top:  0.25em;
+	margin-bottom: 0.25em;
+}
+.app-tools a,
+.app-tools a:hover,
+.app-tools a:visited {
+	color: white;
+}
+.app-foot {
+	text-align: center;
+	color: gray;
+	margin-top: 3em;
+}
+.app-foot a, .app-foot a:visited {
+	color: gray;
+}

@@ -1,10 +1,12 @@
 /**
-	Execute of a view with the extended time key as key and integers as values,
-	builds an html table conformant to the timepedia chronoscope microformat
+	Given a view where the key is a 6-level date and value is an object,
+	renders an html table conformant to the timepedia chronoscope microformat
 	(http://timepedia.org/chronoscope/docs/microformats/).
-	
-	MANDATORY group_level 1-6 to control grouping
+	<br/><br/>
+	MANDATORY group_level 1-6 to control grouping<br/>
 	OPTIONAL table_only [true|false] to disable/enable chronoscope (default enabled)
+	
+	@name lists.table_multi
 */
 function(head, req) {
 	// !json templates
@@ -20,9 +22,9 @@ function(head, req) {
 	var dt = get_dtformat(parseInt(req.query.group_level));
 	var table_only = (req.query.table_only && req.query.table_only=='true');
 	
-	if (!table_only)
-		send(Mustache.to_html(templates.chronoscope.html_head));
-	send(Mustache.to_html(templates.app_head, {root:app_root(req.path)}));			
+	if (!table_only) {
+		send(Mustache.to_html(templates.app_head, {root:app_root(req.path)}));
+	}	
 	
 	var keys = null;	
 	while(row = getRow()) {		
@@ -45,8 +47,10 @@ function(head, req) {
 		send('\n');
 	}
 	send(Mustache.to_html(templates.chronoscope.table_foot));
-	send(Mustache.to_html(templates.app_foot));
 	
-	if (!table_only)
-		send(Mustache.to_html(templates.chronoscope.html_foot));
+	if (!table_only) {
+		send(Mustache.to_html(templates.script, {url:'http://api.timepedia.org/widget/'}));
+		send(Mustache.to_html(templates.stylesheet, {href: 'http://api.timepedia.org/widget/Chronoscope.css'}));
+		send(Mustache.to_html(templates.app_foot));
+	}
 }

@@ -1,7 +1,8 @@
 /**
-	Emits one integer for each document: sum of all http requests for each document.
+	Emits a 6-level extended time key and doc.httpd.requests.sum
+	<pre>emit([2010, 1, 1, 20, 30, 0, 4], 33)</pre>
 	
-	@name views.all_http_requests.map
+	@name views.http_requests_hits.map
  */
 function(doc) {
 	// !code lib/stats.js

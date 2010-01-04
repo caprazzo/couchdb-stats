@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>docs</title>
+		<style type="text/css">
+			body {
+				background-color: #00B7EB;
+				font-family: sans-serif;
+			}
+			.content {
+				width: 40em;
+				margin-left: auto;
+				margin-right: auto;
+				background-color: white;
+				border: 1px solid #ddd;
+				padding: 1em;
+				margin-top: 1em;
+				margin-bottom: 2em;
+			}
+			h2 {
+				margin-left: 0.5em;
+				color: #333;
+				border-bottom: 1px solid #333;
+				margin-bottom:0;
+			}
+			h3 {
+				margin-left: 1em;
+			}
+			h4, div.desc {
+				margin-left: 1.5em;
+			}
+			div.desc {
+				padding: 0.25em;
+			}
+			div.top {				
+				text-align:right;
+				position: relative;
+				top: -1.5em;
+			}
+			a, a:visited {
+				color: #00B7EB;
+			}
+			a.link-source {
+				font-size: small;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="content">
+			<h1>documentation</h1>
+			<ol>
+				<li><a href="#views">views</a></li>
+				<li><a href="#shows">shows</a></li>
+				<li><a href="#lists">lists</a></li>
+				<li><a href="#updates">updates</a></li>
+				<li><a href="#fulltext">fulltext</a></li>				
+			</ol>
+			<h2><a name="views">views</a></h2>
+			<div class="top"><a href="#">top</a></div>
+			
+				<h3><a name="views.http_status_codes_hits">http_status_codes_hits</a></h3><h4>map</h4><div class="desc">Emits a 6-level extended time key and an object that counts
+	httpd responses for each status code
+	<pre>emit([2010, 1, 1, 20, 30, 0, 4], { 200: 1, 500: 2, ...})</pre><br/><a class="link-source" href="views.http_status_codes_hits.map.html">view source</a></div><h4>reduce</h4><div class="desc">Takes multiple value objects <pre>{ 200: 1, 500: 2, ...}</pre>
+	amd sums the properties together.<br/><a class="link-source" href="views.http_status_codes_hits.reduce.html">view source</a></div>
+			
+				<h3><a name="views.request_time">request_time</a></h3><h4>map</h4><div class="desc">Emits a 6-level extended time key and a value object with the collective
+	response time and the number of completed requests. [this is not convincing and needs review]
+	
+	<pre>emit([2010, 1, 1, 20, 30, 0, 4], {time:1200, requests:500})</pre><br/><a class="link-source" href="views.request_time.map.html">view source</a></div><h4>reduce</h4><div class="desc">Takes multple value objects
+	<pre>[{time:1200, requests:500}, {time:55, requests:2000}]</pre>
+	
+	sums times and requests and calcs the average
+	
+	<pre>{time:1255, requests:2500, avg: 0.502}</pre><br/><a class="link-source" href="views.request_time.reduce.html">view source</a></div>
+			
+				<h3><a name="views.http_requests_hits_by_method">http_requests_hits_by_method</a></h3><h4>map</h4><div class="desc">Emits a 6-level extended time key and an object that counts
+	httpd hits for each method
+	<pre>emit([2010, 1, 1, 20, 30, 0, 4], { POST: 1, GET: 2, ...})</pre><br/><a class="link-source" href="views.http_requests_hits_by_method.map.html">view source</a></div><h4>reduce</h4><div class="desc">Takes multiple value objects <pre>{ POST: 1, GET: 2, ...}</pre>
+	amd sums the properties together.<br/><a class="link-source" href="views.http_requests_hits_by_method.reduce.html">view source</a></div>
+			
+				<h3><a name="views.http_requests_hits">http_requests_hits</a></h3><h4>map</h4><div class="desc">Emits a 6-level extended time key and doc.httpd.requests.sum
+	<pre>emit([2010, 1, 1, 20, 30, 0, 4], 33)</pre><br/><a class="link-source" href="views.http_requests_hits.map.html">view source</a></div><h4>http_requests_hits</h4><div class="desc">simply sum(values)<br/><a class="link-source" href="views.http_requests_hits.html">view source</a></div>
+			
+			
+			<h2><a name="shows">shows</a></h2>
+			<div class="top"><a href="#">top</a></div>
+			
+				<h3>index</h3><div class="desc">Bogus index show<br/><br/>
+	
+	used only to reuse templates, must be called with an existing id
+	(use current design doc id to be sure)<br/><a class="link-source" href="shows.index.html">view source</a></div>
+			
+			
+			<h2><a name="lists">lists</a></h2>
+			<div class="top"><a href="#">top</a></div>
+			
+				<h3>table</h3><div class="desc">Given a view where the key is a 6-level date and value an integer,
+	renders an html table conformant to the timepedia chronoscope microformat
+	(http://timepedia.org/chronoscope/docs/microformats/).
+	<br/><br/>
+	MANDATORY group_level 1-6 to control grouping<br/>
+	OPTIONAL table_only [true|false] to disable/enable chronoscope (default enabled)<br/><a class="link-source" href="lists.table.html">view source</a></div>
+			
+				<h3>table_multi</h3><div class="desc">Given a view where the key is a 6-level date and value is an object,
+	renders an html table conformant to the timepedia chronoscope microformat
+	(http://timepedia.org/chronoscope/docs/microformats/).
+	<br/><br/>
+	MANDATORY group_level 1-6 to control grouping<br/>
+	OPTIONAL table_only [true|false] to disable/enable chronoscope (default enabled)<br/><a class="link-source" href="lists.table_multi.html">view source</a></div>
+			
+			
+			<h2><a name="updates">updates</a></h2>
+			<div class="top"><a href="#">top</a></div>
+			
+			
+			<h2><a name="fulltext">fulltext</a></h2>
+			<div class="top"><a href="#">top</a></div>
+			
+		</div>
+	</body>
+</html>
