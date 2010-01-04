@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Generated CouchApp</title>
+    <link rel="stylesheet" href="style/main.css" type="text/css">
+	<script src="http://api.timepedia.org/widget/chronoscope.js"></script> 
+  </head>
+  <body>
+    <h1>Generated CouchApp</h1>
+    <p>This is a placeholder page</p>
+  </body>
+  <script src="/_utils/script/json2.js"></script>
+  <script src="/_utils/script/jquery.js?1.3.1"></script>
+  <script src="/_utils/script/jquery.couch.js?0.9.0"></script>
+<script>
+function onChronoscopeLoaded(chrono) {
+    var data = [dataset];
+    chronoscope.Chronoscope.setFontBookRendering(true);
+    chronoscope.Chronoscope.setFontBookServiceEndpoint("http://api.timepedia.org/fr");
+    chronoscope.Chronoscope.setErrorReporting(true);
+    chronoscope.Chronoscope.createTimeseriesChartById("chartid", data, 650, 433,
+    function(view) {
+        view.getChart().redraw();
+        largeview = view;
+    });
+}
+</script>
+</html>
