@@ -22,7 +22,8 @@ function(head, req) {
 	
 	if (!table_only)
 		send(Mustache.to_html(templates.chronoscope.html_head));
-			
+	send(Mustache.to_html(templates.app_head, {root:app_root(req.path)}));			
+	
 	var keys = null;	
 	while(row = getRow()) {		
 		if (keys == null) {
@@ -44,6 +45,7 @@ function(head, req) {
 		send('\n');
 	}
 	send(Mustache.to_html(templates.chronoscope.table_foot));
+	send(Mustache.to_html(templates.app_foot));
 	
 	if (!table_only)
 		send(Mustache.to_html(templates.chronoscope.html_foot));
