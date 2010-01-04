@@ -3,7 +3,7 @@ import time
 from datetime import datetime
 import threading
 import sys
-import json
+import simplejson as json
 
 class Couch:
 	"""Basic wrapper class for operations on a couchDB"""
