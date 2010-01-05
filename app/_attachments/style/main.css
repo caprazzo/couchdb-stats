@@ -26,3 +26,9 @@
 .app-foot a, .app-foot a:visited {
 	color: gray;
 }
+table.cmf-chart tbody {
+	height: 10em;
+	width: 100%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
