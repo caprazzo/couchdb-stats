@@ -15,10 +15,6 @@ function(head, req) {
 	
  	start({"headers":{"Content-Type" : "text/html"}});
 	
-	// group_level 6
-	// key is rebuilt skipping element 4 as it's a 5-minutes span and
-	// is not understood by chronoscope dtformat (better done in the template?)
-	
 	var dt = get_dtformat(parseInt(req.query.group_level));
 	var table_only = (req.query.table_only && req.query.table_only=='true');
 	
