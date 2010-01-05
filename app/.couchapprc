@@ -1,1 +1,10 @@
-{}
+{
+  "env": { 
+    "default": {
+      "db": "http://caprazzi.net:5984/stats-dev"
+    },
+    "production": {
+      "db": "http://caprazzi.net:5984/stats"
+    }
+  }
+}

@@ -25,6 +25,7 @@ function(head, req) {
 	if (!table_only) {
 		send(Mustache.to_html(templates.app_head, {root:app_root(req.path)}));
 	}	
+	send(Mustache.to_html(templates.groups_links, build_group_view(req)));
 	
 	var keys = null;	
 	while(row = getRow()) {		

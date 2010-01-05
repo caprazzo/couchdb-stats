@@ -59,3 +59,21 @@ function app_root(current_path) {
 		}
 	}
 }
+
+function build_group_view(req) {
+		var level = parseInt(req.query.group_level, 10);
+	 	var path = '/' + req.path.join('/');
+	 	var urls = [];
+	 	var level_names = ['year', 'month', 'day', 'hour', '5 minutes', 'minute'];
+		for (var lvl=1; lvl<=6; lvl++) {
+			if (lvl == level) continue;
+			urls.push({
+				url: path + '?group_level=' + lvl,
+				caption: level_names[lvl-1],
+				title: 'switch to data by' + level_names[lvl-1]				
+			});
+		}
+		var current_view = level_names[level-1];
+		
+		return {current: current_view, links: urls};
+	}

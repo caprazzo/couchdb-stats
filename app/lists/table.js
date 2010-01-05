@@ -21,7 +21,8 @@ function(head, req) {
 	if (!table_only) {
 		send(Mustache.to_html(templates.app_head, {root:app_root(req.path), title:title}));
 	}
-
+	
+	send(Mustache.to_html(templates.groups_links, build_group_view(req)));
 	send(Mustache.to_html(templates.chronoscope.table_head, {dtformat:dt.dtformat}));
 	while(row = getRow()) {		
 		send(Mustache.to_html(templates.chronoscope.table_item, {
