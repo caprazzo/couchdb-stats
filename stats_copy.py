@@ -1,3 +1,6 @@
+# usage: python stats_copy.py <source_server> <target_server> <target_database> <delay>
+# example store localhosts _stats on localhost:5984/stats every 60 seconds:
+# $ python stats_copy.py localhost localhost stats 60
 import httplib
 import time
 from datetime import datetime

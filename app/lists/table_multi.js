@@ -28,7 +28,8 @@ function(head, req) {
 		if (keys == null) {
 			keys = [];
 			for (var key in row.value) {
-				keys.push(key);
+				if (key[0] != '_')
+					keys.push(key);
 			}
 			keys.sort();
 			send(Mustache.to_html(templates.chronoscope.table_head_multi, {keys: keys, dtformat: dt.dtformat}));
