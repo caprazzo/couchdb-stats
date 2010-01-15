@@ -25,13 +25,18 @@ function extended_time_key_from_json_date(str_timestamp) {
 	];
 }
 
-function get_dtformat(group_level) {
+function get_dtformat(group_level, style) {
+	var formats = {
+		'chronoscope': 'yyyy-M-d-H-m',
+		'gnuplot': '%Y-%m-%d-%H-%M'
+	}
+	var fmt = formats[style || 'chronoscope'];
 	if (group_level == 6) {
 		return {
 			f_key: function(key) {
 				return [ key[0], key[1], key[2], key[3], key[5] ].join('-')
 			},
-			dtformat: 'yyyy-M-d-H-m'			
+			dtformat: fmt			
 		}
 	}
 	else if (group_level == 5) {
@@ -39,7 +44,7 @@ function get_dtformat(group_level) {
 			f_key: function(key) {
 				return [ key[0], key[1], key[2], key[3], key[4]*5 ].join('-')
 			},
-			dtformat: 'yyyy-M-d-H-m'			
+			dtformat: fmt
 		}
 	}
 	else if (group_level < 5) {
@@ -47,7 +52,7 @@ function get_dtformat(group_level) {
 			f_key: function(key) {
 				return key.join('-');
 			},
-			dtformat: 'yyyy-M-d-H-m'.split('-').slice(0,parseInt(req.query.group_level)).join('-')
+			dtformat: fmt.split('-').slice(0,parseInt(req.query.group_level)).join('-')
 		}
 	}
 }
